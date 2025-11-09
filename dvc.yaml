@@ -1,0 +1,20 @@
+stages:
+  prepare_data:
+    cmd: python src/prepare_data.py --region ${region} --param_set ${param_set}
+    deps:
+      - src/prepare_data.py
+      - data/raw/${region}/data.csv
+    outs:
+      - data/processed/${region}_${param_set}.csv
+
+  train_model:
+    cmd: python src/train.py --data data/processed/${region}_${param_set}.csv \
+                             --model models/${model}/${region}_${param_set}.pkl \
+                             --lr ${learning_rate} --batch_size ${batch_size}
+    deps:
+      - src/train.py
+      - data/processed/${region}_${param_set}.csv
+    outs:
+      - models/${model}/${region}_${param_set}.pkl
+    metrics:
+      - metrics/${model}_${region}_${param_set}.json
