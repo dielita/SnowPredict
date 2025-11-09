@@ -8,9 +8,7 @@ stages:
       - data/processed/${region}_${param_set}.csv
 
   train_model:
-    cmd: python src/train.py --data data/processed/${region}_${param_set}.csv \
-                             --model models/${model}/${region}_${param_set}.pkl \
-                             --lr ${learning_rate} --batch_size ${batch_size}
+    cmd: python src/train.py --data data/processed/${region}_${param_set}.csv --model models/${model}/${region}_${param_set}.pkl --lr ${learning_rate} --batch_size ${batch_size} --model_name ${model}
     deps:
       - src/train.py
       - data/processed/${region}_${param_set}.csv

@@ -1,0 +1,40 @@
+schema: '2.0'
+stages:
+  prepare_data:
+    cmd: python src/prepare_data.py --region elbrus --param_set wind_temp
+    deps:
+    - path: data/raw/elbrus/data.csv
+      hash: md5
+      md5: 7d5e77884a47396a6632a11550a2ec3a
+      size: 55
+    - path: src/prepare_data.py
+      hash: md5
+      md5: 0f55e3872e702f6cd06fa988e060e604
+      size: 2031
+    outs:
+    - path: data/processed/elbrus_wind_temp.csv
+      hash: md5
+      md5: 486869b1f656b333d36e3910a3b5252f
+      size: 31
+  train_model:
+    cmd: python src/train.py --data data/processed/elbrus_wind_temp.csv --model 
+      models/model_A/elbrus_wind_temp.pkl --lr 0.001 --batch_size 32 
+      --model_name model_A
+    deps:
+    - path: data/processed/elbrus_wind_temp.csv
+      hash: md5
+      md5: 486869b1f656b333d36e3910a3b5252f
+      size: 31
+    - path: src/train.py
+      hash: md5
+      md5: 691bd0433b14605deb5b3ab1fc0aad56
+      size: 1545
+    outs:
+    - path: metrics/model_A_elbrus_wind_temp.json
+      hash: md5
+      md5: bd7ec072d76a85682c4c98068a66c2a2
+      size: 67
+    - path: models/model_A/elbrus_wind_temp.pkl
+      hash: md5
+      md5: 07939fdc7b012bcd68a057cba453597f
+      size: 15

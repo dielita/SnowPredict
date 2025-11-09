@@ -1,5 +1,5 @@
 model: model_A
-region: khibiny
-param_set: snow_temp
+region: elbrus
+param_set: wind_temp
 learning_rate: 0.001
 batch_size: 32
