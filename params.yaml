@@ -1,5 +1,5 @@
 model: model_A
-region: sochi
-param_set: wind_temp
-learning_rate: 0.001
+region: khibiny
+param_set: wind_temp_snow
+learning_rate: 0.002
 batch_size: 32

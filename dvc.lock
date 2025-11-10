@@ -1,40 +1,40 @@
 schema: '2.0'
 stages:
   prepare_data:
-    cmd: python src/prepare_data.py --region sochi --param_set wind_temp
+    cmd: python src/prepare_data.py --region khibiny --param_set wind_temp_snow
     deps:
-    - path: data/raw/sochi/data.csv
+    - path: data/raw/khibiny/data.csv
       hash: md5
-      md5: 68bc0ee2022d0f40159f141ba3edf293
-      size: 50
+      md5: 45ab950ba9d96dc1d3b691628c62f02a
+      size: 57
     - path: src/prepare_data.py
       hash: md5
-      md5: 0f55e3872e702f6cd06fa988e060e604
-      size: 2031
+      md5: 7c4f17ebd66578c6356c06c6d76a3eb5
+      size: 2205
     outs:
-    - path: data/processed/sochi_wind_temp.csv
+    - path: data/processed/khibiny_wind_temp_snow.csv
       hash: md5
-      md5: b0d5d36fafd612f67b4b2af616e3da53
-      size: 27
+      md5: c4c21c33f4665dcb3fcc35cddf675f77
+      size: 54
   train_model:
-    cmd: python src/train.py --data data/processed/sochi_wind_temp.csv --model 
-      models/model_A/sochi_wind_temp.pkl --lr 0.001 --batch_size 32 --model_name
-      model_A
+    cmd: python src/train.py --data data/processed/khibiny_wind_temp_snow.csv 
+      --model models/model_A/khibiny_wind_temp_snow.pkl --lr 0.002 --batch_size 
+      32 --model_name model_A
     deps:
-    - path: data/processed/sochi_wind_temp.csv
+    - path: data/processed/khibiny_wind_temp_snow.csv
       hash: md5
-      md5: b0d5d36fafd612f67b4b2af616e3da53
-      size: 27
+      md5: c4c21c33f4665dcb3fcc35cddf675f77
+      size: 54
     - path: src/train.py
       hash: md5
       md5: 691bd0433b14605deb5b3ab1fc0aad56
       size: 1545
     outs:
-    - path: metrics/model_A_sochi_wind_temp.json
+    - path: metrics/model_A_khibiny_wind_temp_snow.json
       hash: md5
-      md5: e86650c1443d9e3cd8df8278e1274cae
-      size: 67
-    - path: models/model_A/sochi_wind_temp.pkl
+      md5: 6dc26a6053e3a02d5619dd4452ef0983
+      size: 68
+    - path: models/model_A/khibiny_wind_temp_snow.pkl
       hash: md5
       md5: 07939fdc7b012bcd68a057cba453597f
       size: 15

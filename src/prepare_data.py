@@ -23,10 +23,14 @@ def prepare(region, param_set):
 
     # Проверяем, есть ли нужные столбцы для выбранного набора параметров
     required_cols = []
-    if param_set == "snow_temp":
+    if param_set == "temp_snow":
         required_cols = ["temp", "snow_depth"]
     elif param_set == "wind_temp":
         required_cols = ["temp", "wind"]
+    elif param_set == "wind_snow":
+        required_cols = ["wind", "snow"]
+    elif param_set == "wind_temp_snow":
+        required_cols = ["temp", "wind","snow_depth"]
     else:
         print(f"Unknown param_set: {param_set}")
         sys.exit(1)
